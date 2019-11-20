@@ -7,15 +7,17 @@ class UserConfig {
    </ label="Select wheel type", help="Select wheel type or listbox", options="horizontal", order=4 /> enable_list_type="horizontal";
    </ label="Select spinwheel art", help="The artwork to spin", options="wheel", order=5 /> orbit_art="wheel";
    </ label="Wheel transition time", help="Time in milliseconds for wheel spin.", order=6 /> transition_ms="35";  
-</ label=" ", help=" ", options=" ", order=7 /> divider1="";
-</ label="--------    Extras     --------", help="Extra layout options", order=8 /> uct2="select below"; 
-   </ label="Enable flyer animation", help="Select yes or no", options="Yes,No", order=9 /> enable_gflyer="No";
+</ label="--------    Extra images     --------", help="Show or hide additional images", order=9 /> uct2="select below";
+   </ label="Enable box art", help="Select box art", options="Yes,No", order=10 /> enable_gboxart="Yes";
+   </ label="Enable cartridge art", help="Select cartridge art", options="Yes,No", order=11 /> enable_gcartart="Yes";
+</ label="--------    Extras     --------", help="Extra layout options", order=15 /> uct2="select below"; 
+   </ label="Enable flyer animation", help="Select yes or no", options="Yes,No", order=16 /> enable_gflyer="No";
    </ label="Random Wheel Sounds", help="Play random sounds when navigating games wheel", options="Yes,No", order=25 /> enable_random_sound="Yes";   
 }
 
 local my_config = fe.get_config();
-local flx = fe.layout.width=640;
-local fly = fe.layout.height=480;
+local flx = fe.layout.width;
+local fly = fe.layout.height;
 local flw = fe.layout.width;
 local flh = fe.layout.height;
 //fe.layout.font="Roboto";
@@ -275,3 +277,18 @@ GenreImage1(glogo1);
 
 local flyerstatic = fe.add_image("flyer/[Emulator]", flx*0.06, fly*0.39, flw*0.14 flh*0.325 );
 
+//////////////////////////////////////////////////////////////////////////////////
+// Box art/Cart art to display, uses the emulator.cfg path for image location
+
+// Static media style
+if ( my_config["enable_gboxart"] )
+{
+local boxartstatic = fe.add_artwork("boxart", flx*0.275, fly*0.385, flw*0.15, flh*0.33 );
+boxartstatic.preserve_aspect_ratio = true;
+}
+
+if ( my_config["enable_gcartart"] == "Yes" )
+{
+local cartartstatic = fe.add_artwork("cartart", flx*0.39, fly*0.565, flw*0.125, flh*0.125 );
+cartartstatic.preserve_aspect_ratio = true;
+}
